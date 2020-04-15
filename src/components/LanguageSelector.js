@@ -22,8 +22,6 @@ function LanguageSelector() {
   const classes = useStyles();
   const [lang, setLang] = useSessionStorage('lang');
 
-  console.log('*** lang selec : ', lang);
-
   return (
     <div className={classes.container}>
       <Typography variant="h6" className={classes.header}>
@@ -35,16 +33,11 @@ function LanguageSelector() {
         aria-label="outlined primary button group"
         value={lang}
       >
-        {COUNTRY_CODES.map(({ code }) => {
-          console.log(code);
-          console.log(lang);
-
-          return (
-            <ToggleButton key={code} value={code} onClick={() => setLang(code)}>
-              {code}
-            </ToggleButton>
-          );
-        })}
+        {COUNTRY_CODES.map(({ code }) => (
+          <ToggleButton key={code} value={code} onClick={() => setLang(code)}>
+            {code}
+          </ToggleButton>
+        ))}
       </ToggleButtonGroup>
     </div>
   );

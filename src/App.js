@@ -9,11 +9,10 @@ function App() {
   const [lang, setLang] = useSessionStorage('lang');
 
   useEffect(() => {
-    console.log('initial log', lang);
     if (!lang) {
       setLang(COUNTRY_CODES[2].code);
     }
-  }, [lang]);
+  }, [lang, setLang]);
 
   return (
     <Router>

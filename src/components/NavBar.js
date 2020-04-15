@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NavBar({ withSearch, icon }) {
   const classes = useStyles();
+  const [searchValue, setSearchValue] = useState('');
 
   return (
     <AppBar position="sticky">
@@ -65,11 +66,12 @@ function NavBar({ withSearch, icon }) {
             </div>
             <InputBase
               placeholder="Search…"
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.target.value)}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'search' }}
             />
           </div>
         )}
