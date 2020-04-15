@@ -1,10 +1,10 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   listItem: {

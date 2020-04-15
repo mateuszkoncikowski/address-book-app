@@ -8,7 +8,7 @@ import DialogContent from './DialogContent';
 const renderSection = (title, fields) => {
   return (
     <>
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography variant="h6" gutterBottom>
         {`${title}:`}
       </Typography>
       {fields.map((field, index) => {
@@ -38,7 +38,7 @@ function UserInfoDialog({ isOpen, handleClose, user }) {
   } = user;
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onClose={handleClose}>
       <DialogTitle onClose={handleClose}>
         User Info - {`${first} ${last}`}
       </DialogTitle>

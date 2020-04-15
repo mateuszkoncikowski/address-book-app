@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useInfiniteQuery } from 'react-query';
-import { map, pipe, reduce } from 'ramda';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import UserInfoDialog from './UserInfoDialog';
 import UserListItem from './UserListItem';
+import useAddresses from '../hooks/useAddresses';
+import { useSessionStorage } from 'react-use';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,47 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const getUsers = async (key, page = 1) => {
-  console.log('key', key);
-
-  const { data } = await axios.get(
-    `https://randomuser.me/api/?page=${page}&results=25&seed=sherpany`
-  );
-
-  return { users: data.results, page: data.info.page };
-};
-
 function AddressList() {
   const classes = useStyles();
 
-  const [hasMore, setHasMore] = useState(true);
-  const [users, setUsers] = useState([]);
+  const [lang] = useSessionStorage('lang');
   const [selectedUser, setSelectedUser] = useState(null);
-
-  const { status, data, error, fetchMore } = useInfiniteQuery(
-    'getUsers',
-    getUsers,
-    {
-      getFetchMore: (lastGroup) => lastGroup.page + 1,
-    }
-  );
-
-  useEffect(() => {
-    if (data.length > 0) {
-      const users = pipe(
-        map((group) => group.users),
-        reduce((acc, cur) => [...acc, ...cur], [])
-      )(data);
-
-      setUsers(users);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (users.length >= 100) {
-      setHasMore(false);
-    }
-  }, [users]);
+  const [users, fetchMore, hasMore, error, status] = useAddresses(lang);
 
   return (
     <>

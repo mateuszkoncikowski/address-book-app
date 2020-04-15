@@ -1,12 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -50,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavBar() {
+function NavBar({ withSearch, icon }) {
   const classes = useStyles();
 
   return (
@@ -59,26 +58,36 @@ function NavBar() {
         <Typography variant="h6" noWrap>
           Address Book
         </Typography>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
+        {withSearch && (
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
           </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </div>
+        )}
         <div className={classes.grow} />
-        <IconButton onClick={() => {}} color="inherit">
-          <AccountCircle />
-        </IconButton>
+        {icon}
       </Toolbar>
     </AppBar>
   );
 }
+
+NavBar.defaultProps = {
+  withSearch: false,
+  icon: null,
+};
+
+NavBar.propTypes = {
+  withSearch: PropTypes.bool,
+  icon: PropTypes.node,
+};
 
 export default NavBar;
