@@ -12,7 +12,7 @@ function Settings() {
   return (
     <>
       <NavBar
-        icon={
+        navigationIcon={
           <IconButton onClick={() => navigate(PATHS.home)} color="inherit">
             <HomeIcon />
           </IconButton>

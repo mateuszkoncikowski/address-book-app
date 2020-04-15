@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddressList() {
+function AddressList({ searchValue }) {
   const classes = useStyles();
 
   const [lang] = useSessionStorage('lang');
@@ -74,5 +75,9 @@ function AddressList() {
     </>
   );
 }
+
+AddressList.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+};
 
 export default AddressList;
