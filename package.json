@@ -35,10 +35,12 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-infinite-scroll-component": "^5.0.4",
     "react-query": "^1.2.3",
+    "react-query-devtools": "^1.1.0",
     "react-scripts": "3.4.1"
   },
   "devDependencies": {
