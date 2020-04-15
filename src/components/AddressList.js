@@ -5,12 +5,10 @@ import { useInfiniteQuery } from 'react-query';
 import { map, pipe, reduce } from 'ramda';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
+import UserInfoDialog from './UserInfoDialog';
+import UserListItem from './UserListItem';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +38,7 @@ function AddressList() {
 
   const [hasMore, setHasMore] = useState(true);
   const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const { status, data, error, fetchMore } = useInfiniteQuery(
     'getUsers',
@@ -68,6 +67,11 @@ function AddressList() {
 
   return (
     <>
+      <UserInfoDialog
+        handleClose={() => setSelectedUser(null)}
+        isOpen={!!selectedUser}
+        user={selectedUser}
+      />
       <List className={classes.root}>
         <InfiniteScroll
           dataLength={users.length}
@@ -87,23 +91,13 @@ function AddressList() {
           }
         >
           {users.map((user, index) => {
-            const {
-              picture: { thumbnail },
-              name: { first, last },
-              email,
-              login: { username },
-            } = user;
-
             return (
-              <ListItem key={user.login.uuid}>
-                <ListItemAvatar>
-                  <Avatar src={thumbnail} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={`${index + 1}. ${username} - ${first} ${last}`}
-                  secondary={email}
-                />
-              </ListItem>
+              <UserListItem
+                index={index}
+                onClick={() => setSelectedUser(user)}
+                user={user}
+                key={index}
+              />
             );
           })}
         </InfiniteScroll>
