@@ -38,7 +38,7 @@ function UserInfoDialog({ isOpen, handleClose, user }) {
   } = user;
 
   return (
-    <Dialog open={isOpen} onClose={handleClose}>
+    <Dialog open={isOpen} onClose={handleClose} data-cy="user-modal">
       <DialogTitle onClose={handleClose}>
         User Info - {`${first} ${last}`}
       </DialogTitle>

@@ -25,7 +25,11 @@ function Home() {
           />
         }
         navigationIcon={
-          <IconButton onClick={() => navigate(PATHS.settings)} color="inherit">
+          <IconButton
+            onClick={() => navigate(PATHS.settings)}
+            color="inherit"
+            data-cy="settings-link"
+          >
             <AccountCircle />
           </IconButton>
         }

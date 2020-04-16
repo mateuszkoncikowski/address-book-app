@@ -35,6 +35,7 @@ const DialogTitle = withStyles(styles)((props) => {
           aria-label="close"
           className={classes.closeButton}
           onClick={onClose}
+          data-cy="close-button"
         >
           <CloseIcon />
         </IconButton>

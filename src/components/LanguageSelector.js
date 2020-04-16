@@ -40,6 +40,7 @@ function LanguageSelector(props) {
             key={code}
             value={code}
             onClick={() => switchLanguage(code)}
+            data-cy={`set-lang-${code}`}
           >
             {code}
           </ToggleButton>

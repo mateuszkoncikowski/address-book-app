@@ -17,7 +17,11 @@ function Settings() {
     <>
       <NavBar
         navigationIcon={
-          <IconButton onClick={() => navigate(PATHS.home)} color="inherit">
+          <IconButton
+            onClick={() => navigate(PATHS.home)}
+            color="inherit"
+            data-cy="home-link"
+          >
             <HomeIcon />
           </IconButton>
         }

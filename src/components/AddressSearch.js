@@ -52,6 +52,7 @@ function AddressSearch({ searchValue, setSearchValue }) {
         <SearchIcon />
       </div>
       <InputBase
+        data-cy="user-search"
         placeholder="Search…"
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}

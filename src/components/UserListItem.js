@@ -26,7 +26,11 @@ function UserListItem({ user, index, onClick }) {
   } = user;
 
   return (
-    <ListItem onClick={onClick} className={classes.listItem}>
+    <ListItem
+      onClick={onClick}
+      className={classes.listItem}
+      data-cy="user-item"
+    >
       <ListItemAvatar>
         <Avatar src={thumbnail} />
       </ListItemAvatar>
