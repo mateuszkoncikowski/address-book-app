@@ -1,3 +1,7 @@
+![Address Book CI](https://github.com/mateuszkoncikowski/address-book-app/workflows/Address%20Book%20CI/badge.svg)
+
+# Address Book app
+
 ## Available Scripts
 
 In the project directory, you can run:

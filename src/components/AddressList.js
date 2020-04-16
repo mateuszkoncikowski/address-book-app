@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 import UserInfoDialog from './UserInfoDialog';
 import UserListItem from './UserListItem';
 import useAddresses from '../hooks/useAddresses';
-import useFilter from '../hooks/useFilter';
+import useFilter, { filterUser } from '../hooks/useFilter';
 import Loading from './Loading';
 import { connect } from 'react-redux';
 
@@ -18,18 +18,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const filterUsers = (filter, user) => {
-  const {
-    name: { first, last },
-  } = user;
-  const loweredFilter = filter.toLowerCase();
-
-  return (
-    first.toLowerCase().includes(loweredFilter) ||
-    last.toLowerCase().includes(loweredFilter)
-  );
-};
-
 function AddressList(props) {
   const classes = useStyles();
   const { batchSize, fetchLimit, lang, searchValue } = props;
@@ -39,7 +27,7 @@ function AddressList(props) {
     fetchLimit,
     batchSize
   );
-  const [filteredUsers] = useFilter(users, searchValue, filterUsers);
+  const [filteredUsers] = useFilter(users, searchValue, filterUser);
 
   return (
     <>

@@ -11,9 +11,10 @@
     "eject": "react-scripts eject",
     "serve": "npx serve --no-clipboard --single --listen 3667 build",
     "start": "react-scripts start",
-    "test": "react-scripts test",
-    "test:cypress": "npm run build && npm run cy:start-server-and-test",
-    "test:cypress:dev": "npm-run-all --parallel --race start 'cy:open'"
+    "test:cypress:ci": "npm run build && npm run cy:start-server-and-test",
+    "test:cypress:dev": "npm-run-all --parallel --race start 'cy:open'",
+    "test:unit:ci": "react-scripts test --watchAll=false",
+    "test:unit:dev": "react-scripts test"
   },
   "browserslist": {
     "production": [
