@@ -41,7 +41,7 @@ function AddressList(props) {
           dataLength={users.length}
           next={fetchMore}
           hasMore={hasMore}
-          loader={!error && <Loading />}
+          loader={status === 'loading' && <Loading />}
           endMessage={
             <Box textAlign="center" color="primary">
               End of users catalog
@@ -63,6 +63,11 @@ function AddressList(props) {
       {status === 'error' && (
         <Box textAlign="center" color="red">
           {error.message}
+        </Box>
+      )}
+      {status !== 'loading' && filteredUsers.length === 0 && (
+        <Box textAlign="center" color="primary">
+          No results available
         </Box>
       )}
     </>

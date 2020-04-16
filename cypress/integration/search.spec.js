@@ -42,6 +42,12 @@ describe('smoke tests', () => {
       .should('contain', 'Sergio Marin');
   });
 
+  it('should search return no results', () => {
+    cy.get(s(search)).type('Invalid');
+    cy.get(s(userItem)).should('have.length', 0);
+    cy.contains('No results available').should('be.visible');
+  });
+
   it('should change language', () => {
     cy.get(s('settings-link')).click();
     cy.get(s('set-lang-es')).should('have.attr', 'aria-pressed', 'true');
