@@ -4,6 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
 import NavBar from '../components/NavBar';
 import { PATHS } from '../config';
+import Loading from '../components/Loading';
 
 const LanguageSelector = React.lazy(() => {
   return import('../components/LanguageSelector');
@@ -21,7 +22,7 @@ function Settings() {
           </IconButton>
         }
       />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <LanguageSelector />
       </Suspense>
     </>

@@ -5,6 +5,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import NavBar from '../components/NavBar';
 import AddressSearch from '../components/AddressSearch';
 import { PATHS } from '../config';
+import Loading from '../components/Loading';
 
 const AddressList = React.lazy(() => {
   return import('../components/AddressList');
@@ -29,7 +30,7 @@ function Home() {
           </IconButton>
         }
       />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <AddressList searchValue={searchValue} />
       </Suspense>
     </>

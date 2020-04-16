@@ -10,6 +10,7 @@ import UserListItem from './UserListItem';
 import useAddresses from '../hooks/useAddresses';
 import { useSessionStorage } from 'react-use';
 import useFilter from '../hooks/useFilter';
+import Loading from './Loading';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,13 +57,7 @@ function AddressList({ searchValue }) {
           dataLength={users.length}
           next={fetchMore}
           hasMore={hasMore}
-          loader={
-            !error && (
-              <div className={classes.loaderContainer}>
-                <CircularProgress />
-              </div>
-            )
-          }
+          loader={!error && <Loading />}
           endMessage={
             <Box textAlign="center" color="primary">
               End of users catalog
