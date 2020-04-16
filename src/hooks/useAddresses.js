@@ -40,7 +40,7 @@ const useAddresses = (lang, fetchLimit, batchSize) => {
     if (addresses.length >= fetchLimit) {
       setHasMore(false);
     }
-  }, [addresses]);
+  }, [addresses, fetchLimit]);
 
   return [addresses, fetchMore, hasMore, error, status];
 };
