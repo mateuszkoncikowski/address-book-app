@@ -9,6 +9,7 @@ import UserInfoDialog from './UserInfoDialog';
 import UserListItem from './UserListItem';
 import useAddresses from '../hooks/useAddresses';
 import { useSessionStorage } from 'react-use';
+import useFilter from '../hooks/useFilter';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,12 +24,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const filterUsers = (filter, user) => {
+  const {
+    name: { first, last },
+  } = user;
+  const loweredFilter = filter.toLowerCase();
+
+  return (
+    first.toLowerCase().includes(loweredFilter) ||
+    last.toLowerCase().includes(loweredFilter)
+  );
+};
+
 function AddressList({ searchValue }) {
   const classes = useStyles();
 
   const [lang] = useSessionStorage('lang');
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, fetchMore, hasMore, error, status] = useAddresses(lang);
+  const [filteredUsers] = useFilter(users, searchValue, filterUsers);
 
   return (
     <>
@@ -50,12 +64,12 @@ function AddressList({ searchValue }) {
             )
           }
           endMessage={
-            <p style={{ textAlign: 'center' }}>
-              <b>End of users catalog</b>
-            </p>
+            <Box textAlign="center" color="primary">
+              End of users catalog
+            </Box>
           }
         >
-          {users.map((user, index) => {
+          {filteredUsers.map((user, index) => {
             return (
               <UserListItem
                 index={index}
