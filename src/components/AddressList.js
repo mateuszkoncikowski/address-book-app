@@ -3,25 +3,18 @@ import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import UserInfoDialog from './UserInfoDialog';
 import UserListItem from './UserListItem';
 import useAddresses from '../hooks/useAddresses';
-import { useSessionStorage } from 'react-use';
 import useFilter from '../hooks/useFilter';
 import Loading from './Loading';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     backgroundColor: theme.palette.background.default,
-  },
-  loaderContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '80px',
   },
 }));
 
@@ -37,10 +30,9 @@ const filterUsers = (filter, user) => {
   );
 };
 
-function AddressList({ searchValue }) {
+function AddressList(props) {
   const classes = useStyles();
-
-  const [lang] = useSessionStorage('lang');
+  const { searchValue, lang } = props;
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, fetchMore, hasMore, error, status] = useAddresses(lang);
   const [filteredUsers] = useFilter(users, searchValue, filterUsers);
@@ -87,6 +79,11 @@ function AddressList({ searchValue }) {
 
 AddressList.propTypes = {
   searchValue: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
 };
 
-export default AddressList;
+const mapStateToProps = (state) => ({
+  lang: state.settings.lang,
+});
+
+export default connect(mapStateToProps, null)(AddressList);

@@ -1,19 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Router } from '@reach/router';
 import Home from './views/Home';
 import Settings from './views/Settings';
-import { COUNTRY_CODES, PATHS } from './config';
-import { useSessionStorage } from 'react-use';
+import { PATHS } from './config';
 
 function App() {
-  const [lang, setLang] = useSessionStorage('lang');
-
-  useEffect(() => {
-    if (!lang) {
-      setLang(COUNTRY_CODES[2].code);
-    }
-  }, [lang, setLang]);
-
   return (
     <Router>
       <Home path={PATHS.home} />

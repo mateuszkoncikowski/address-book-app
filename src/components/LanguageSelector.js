@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSessionStorage } from 'react-use';
+import { connect } from 'react-redux';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { COUNTRY_CODES } from '../config';
+import { switchLanguage } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LanguageSelector() {
+function LanguageSelector(props) {
+  const { lang, switchLanguage } = props;
   const classes = useStyles();
-  const [lang, setLang] = useSessionStorage('lang');
 
   return (
     <div className={classes.container}>
@@ -34,7 +36,11 @@ function LanguageSelector() {
         value={lang}
       >
         {COUNTRY_CODES.map(({ code }) => (
-          <ToggleButton key={code} value={code} onClick={() => setLang(code)}>
+          <ToggleButton
+            key={code}
+            value={code}
+            onClick={() => switchLanguage(code)}
+          >
             {code}
           </ToggleButton>
         ))}
@@ -43,4 +49,17 @@ function LanguageSelector() {
   );
 }
 
-export default LanguageSelector;
+LanguageSelector.propTypes = {
+  lang: PropTypes.string.isRequired,
+  switchLanguage: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  lang: state.settings.lang,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  switchLanguage: (lang) => dispatch(switchLanguage(lang)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LanguageSelector);
