@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useNavigate } from '@reach/router';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import AddressList from '../components/AddressList';
 import NavBar from '../components/NavBar';
-import { PATHS } from '../config';
 import AddressSearch from '../components/AddressSearch';
+import { PATHS } from '../config';
+
+const AddressList = React.lazy(() => {
+  return import('../components/AddressList');
+});
 
 function Home() {
   const navigate = useNavigate();
@@ -26,7 +29,9 @@ function Home() {
           </IconButton>
         }
       />
-      <AddressList searchValue={searchValue} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <AddressList searchValue={searchValue} />
+      </Suspense>
     </>
   );
 }
