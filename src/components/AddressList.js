@@ -32,9 +32,13 @@ const filterUsers = (filter, user) => {
 
 function AddressList(props) {
   const classes = useStyles();
-  const { searchValue, lang } = props;
+  const { batchSize, fetchLimit, lang, searchValue } = props;
   const [selectedUser, setSelectedUser] = useState(null);
-  const [users, fetchMore, hasMore, error, status] = useAddresses(lang);
+  const [users, fetchMore, hasMore, error, status] = useAddresses(
+    lang,
+    fetchLimit,
+    batchSize
+  );
   const [filteredUsers] = useFilter(users, searchValue, filterUsers);
 
   return (
@@ -78,12 +82,19 @@ function AddressList(props) {
 }
 
 AddressList.propTypes = {
-  searchValue: PropTypes.string.isRequired,
+  batchSize: PropTypes.number.isRequired,
+  fetchLimit: PropTypes.number.isRequired,
   lang: PropTypes.string.isRequired,
+  searchValue: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  lang: state.settings.lang,
-});
+const mapStateToProps = (state) => {
+  const settings = state.settings;
+  return {
+    lang: settings.lang,
+    batchSize: settings.batchSize,
+    fetchLimit: settings.fetchLimit,
+  };
+};
 
 export default connect(mapStateToProps, null)(AddressList);

@@ -1,4 +1,5 @@
 import { s } from '../support/commands';
+import { setFetchBatchSize, setFetchLimit } from '../../src/actions';
 
 const userItem = 'user-item';
 const modal = 'user-modal';
@@ -7,6 +8,8 @@ const search = 'user-search';
 describe('smoke tests', () => {
   beforeEach(() => {
     cy.visit('/');
+    cy.window().its('store').invoke('dispatch', setFetchBatchSize(25));
+    cy.window().its('store').invoke('dispatch', setFetchLimit(100));
   });
 
   it('should load users', () => {
@@ -50,7 +53,7 @@ describe('smoke tests', () => {
       .should('contain', 'angelo.marchand@example.com');
   });
 
-  it.only('should infinite scroll load more results', () => {
+  it('should infinite scroll load more results', () => {
     cy.get(s(userItem)).should('have.length', 25);
     cy.scrollTo('bottom');
     cy.get(s(userItem)).should('have.length', 50);

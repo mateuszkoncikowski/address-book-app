@@ -17,3 +17,8 @@ ReactDOM.render(
   </>,
   document.getElementById('root')
 );
+
+// Test purpose only
+if (window.Cypress) {
+  window.store = store;
+}

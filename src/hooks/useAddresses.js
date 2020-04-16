@@ -5,20 +5,20 @@ import axios from 'axios';
 
 const getAddresses = async (key, params, fetchMoreParams) => {
   const page = fetchMoreParams ? fetchMoreParams.page + 1 : 1;
-  const { lang } = params;
+  const { lang, batchSize } = params;
   const { data } = await axios.get(
-    `https://randomuser.me/api/?page=${page}&results=25&nat=${lang}&seed=sherpany`
+    `https://randomuser.me/api/?page=${page}&results=${batchSize}&nat=${lang}&seed=sherpany`
   );
 
   return { users: data.results, page: data.info.page };
 };
 
-const useAddresses = (lang) => {
+const useAddresses = (lang, fetchLimit, batchSize) => {
   const [addresses, setAddresses] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 
   const { status, data, error, fetchMore } = useInfiniteQuery(
-    ['getAddresses', { lang: lang }],
+    ['getAddresses', { lang, batchSize }],
     getAddresses,
     {
       getFetchMore: (params) => params,
@@ -37,7 +37,7 @@ const useAddresses = (lang) => {
   }, [data]);
 
   useEffect(() => {
-    if (addresses.length >= 100) {
+    if (addresses.length >= fetchLimit) {
       setHasMore(false);
     }
   }, [addresses]);
