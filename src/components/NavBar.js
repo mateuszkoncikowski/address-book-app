@@ -15,7 +15,7 @@ function NavBar({ searchComponent, navigationIcon }) {
   const classes = useStyles();
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" noWrap>
           Address Book

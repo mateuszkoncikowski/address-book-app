@@ -3,12 +3,12 @@ import { useNavigate } from '@reach/router';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NavBar from '../components/NavBar';
-import AddressSearch from '../components/AddressSearch';
+import UserSearch from '../components/UserSearch';
 import { PATHS } from '../config';
 import Loading from '../components/Loading';
 
-const AddressList = React.lazy(() => {
-  return import('../components/AddressList');
+const UserList = React.lazy(() => {
+  return import('../components/UserList');
 });
 
 function Home() {
@@ -19,7 +19,7 @@ function Home() {
     <>
       <NavBar
         searchComponent={
-          <AddressSearch
+          <UserSearch
             searchValue={searchValue}
             setSearchValue={setSearchValue}
           />
@@ -35,7 +35,7 @@ function Home() {
         }
       />
       <Suspense fallback={<Loading />}>
-        <AddressList searchValue={searchValue} />
+        <UserList searchValue={searchValue} />
       </Suspense>
     </>
   );

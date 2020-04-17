@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddressSearch({ searchValue, setSearchValue }) {
+function UserSearch({ searchValue, setSearchValue }) {
   const classes = useStyles();
 
   return (
@@ -65,9 +65,9 @@ function AddressSearch({ searchValue, setSearchValue }) {
   );
 }
 
-AddressSearch.propTypes = {
+UserSearch.propTypes = {
   searchValue: PropTypes.string.isRequired,
   setSearchValue: PropTypes.func.isRequired,
 };
 
-export default AddressSearch;
+export default UserSearch;

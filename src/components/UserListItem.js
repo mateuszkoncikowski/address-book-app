@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function UserListItem({ user, index, onClick }) {
+function UserListItem({ user, index, onClick, style }) {
   const classes = useStyles();
 
   const {
@@ -28,6 +28,7 @@ function UserListItem({ user, index, onClick }) {
   return (
     <ListItem
       onClick={onClick}
+      style={style}
       className={classes.listItem}
       data-cy="user-item"
     >
@@ -46,7 +47,7 @@ UserListItem.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
     picture: PropTypes.shape({
-      thumbnail: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string,
     }),
     name: PropTypes.shape({
       first: PropTypes.string.isRequired,
