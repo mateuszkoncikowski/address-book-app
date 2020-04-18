@@ -22,7 +22,7 @@ const getUsers = async (key, params, fetchMoreParams) => {
 
 const useUsers = (lang, fetchLimit, batchSize) => {
   const [users, setUsers] = useState([]);
-  const { data, fetchMore } = useInfiniteQuery(
+  const { data, fetchMore, isFetching, isFetchingMore } = useInfiniteQuery(
     ['getUsers', { lang, batchSize }],
     getUsers,
     {
@@ -31,6 +31,8 @@ const useUsers = (lang, fetchLimit, batchSize) => {
       },
     }
   );
+
+  const isLoading = isFetching || isFetchingMore;
 
   useEffect(() => {
     if (data.length > 0) {
@@ -43,7 +45,7 @@ const useUsers = (lang, fetchLimit, batchSize) => {
     }
   }, [data, fetchLimit]);
 
-  return [users, fetchMore];
+  return [users, fetchMore, isLoading];
 };
 
 export default useUsers;

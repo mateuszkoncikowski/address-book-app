@@ -15,11 +15,15 @@ function UserList() {
   const classes = useStyles();
   const [selectedUser, setSelectedUser] = useState(null);
   const [isLastItemDisplayed, setIsLastItemDisplayed] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div className={classes.container}>
       <Snackbar open={isLastItemDisplayed} autoHideDuration={6000}>
         <Alert severity="info">End of users catalog</Alert>
+      </Snackbar>
+      <Snackbar open={isLoading} autoHideDuration={6000}>
+        <Alert severity="info">Loading ...</Alert>
       </Snackbar>
       <UserInfoDialog
         handleClose={() => setSelectedUser(null)}
@@ -29,6 +33,7 @@ function UserList() {
       <InfiniteList
         setIsLastItemDisplayed={setIsLastItemDisplayed}
         setSelectedUser={setSelectedUser}
+        setIsLoading={setIsLoading}
       />
     </div>
   );
