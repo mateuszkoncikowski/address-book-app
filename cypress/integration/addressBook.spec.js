@@ -4,12 +4,13 @@ import { setFetchBatchSize, setFetchLimit } from '../../src/actions';
 const userItem = 'user-item';
 const modal = 'user-modal';
 const search = 'user-search';
+const infiniteScroll = '[style*="overflow: auto"';
 
 describe('smoke tests', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.window().its('store').invoke('dispatch', setFetchBatchSize(25));
-    cy.window().its('store').invoke('dispatch', setFetchLimit(100));
+    cy.window().its('store').invoke('dispatch', setFetchLimit(50));
   });
 
   it('should load users', () => {
@@ -20,11 +21,12 @@ describe('smoke tests', () => {
   });
 
   it('should open modal', () => {
+    cy.get(s(search)).type('Luc');
     cy.get(s(userItem)).eq(0).click();
     cy.get(s(modal))
       .should('be.visible')
-      .should('contain', 'Calle de La Democracia 4527')
-      .should('contain', '974-479-287');
+      .should('contain', 'Calle de La Democracia 3088')
+      .should('contain', '911-593-211');
     cy.get(s('close-button')).click();
     cy.get(s(modal)).should('not.be.visible');
   });
@@ -36,16 +38,16 @@ describe('smoke tests', () => {
       .eq(0)
       .should('contain', 'Lucas Gimenez');
     cy.get(s(search)).get('input').clear().type('Mar');
+    cy.get(s(userItem)).should('have.length', 2).eq(0);
     cy.get(s(userItem))
-      .should('have.length', 3)
-      .eq(0)
-      .should('contain', 'Sergio Marin');
+      .should('contain', 'Sergio Marin')
+      .eq(1)
+      .should('contain', 'Ernesto Marquez');
   });
 
   it('should search return no results', () => {
     cy.get(s(search)).type('Invalid');
     cy.get(s(userItem)).should('have.length', 0);
-    cy.contains('No results available').should('be.visible');
   });
 
   it('should change language', () => {
@@ -60,13 +62,8 @@ describe('smoke tests', () => {
   });
 
   it('should infinite scroll load more results', () => {
-    cy.get(s(userItem)).should('have.length', 25);
-    cy.scrollTo('bottom');
-    cy.get(s(userItem)).should('have.length', 50);
-    cy.scrollTo('bottom');
-    cy.get(s(userItem)).should('have.length', 75);
-    cy.scrollTo('bottom');
-    cy.get(s(userItem)).should('have.length', 100);
+    cy.get(infiniteScroll).scrollTo('bottom', { duration: 3000 });
+    cy.get(infiniteScroll).scrollTo('bottom', { duration: 3000 });
     cy.contains('End of users catalog').should('be.visible');
   });
 });

@@ -4,7 +4,7 @@ import { actionTypes } from '../actions';
 const initialState = {
   lang: COUNTRY_CODES[1].code,
   batchSize: 50,
-  fetchLimit: 100,
+  fetchLimit: 1000,
 };
 
 const settings = (state = initialState, action) => {

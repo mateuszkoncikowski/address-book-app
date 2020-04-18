@@ -29,12 +29,7 @@ function LanguageSelector(props) {
       <Typography variant="h6" className={classes.header}>
         Change language
       </Typography>
-      <ToggleButtonGroup
-        variant="contained"
-        color="primary"
-        aria-label="outlined primary button group"
-        value={lang}
-      >
+      <ToggleButtonGroup variant="contained" color="primary" value={lang}>
         {COUNTRY_CODES.map(({ code }) => (
           <ToggleButton
             key={code}

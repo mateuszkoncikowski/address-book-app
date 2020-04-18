@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense } from 'react';
 import { useNavigate } from '@reach/router';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -13,17 +13,11 @@ const UserList = React.lazy(() => {
 
 function Home() {
   const navigate = useNavigate();
-  const [searchValue, setSearchValue] = useState('');
 
   return (
     <>
       <NavBar
-        searchComponent={
-          <UserSearch
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-          />
-        }
+        searchComponent={<UserSearch />}
         navigationIcon={
           <IconButton
             onClick={() => navigate(PATHS.settings)}
@@ -35,7 +29,7 @@ function Home() {
         }
       />
       <Suspense fallback={<Loading />}>
-        <UserList searchValue={searchValue} />
+        <UserList />
       </Suspense>
     </>
   );

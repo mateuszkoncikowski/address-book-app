@@ -44,6 +44,7 @@ function UserListItem({ user, index, onClick, style }) {
 }
 
 UserListItem.propTypes = {
+  style: PropTypes.object.isRequired,
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
     picture: PropTypes.shape({

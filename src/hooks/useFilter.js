@@ -6,12 +6,13 @@ export const filterUser = (filter, user) => {
   const {
     name: { first, last },
   } = user;
-  const loweredFilter = filter ? filter.toLowerCase() : null;
 
-  return (
-    (!!first && first.toLowerCase().includes(loweredFilter)) ||
-    (!!last && last.toLowerCase().includes(loweredFilter))
-  );
+  if (filter) {
+    return `${first ? first : ''} ${last ? last : ''}`
+      .toLowerCase()
+      .includes(filter.toLowerCase());
+  }
+  return false;
 };
 
 export const useFilter = (items, filterValue, fn) => {
@@ -20,7 +21,7 @@ export const useFilter = (items, filterValue, fn) => {
     identity,
     filter((item) => fn(filterValue, item))
   );
-  return [filterFn(items)];
+  return filterFn(items);
 };
 
 export default useFilter;

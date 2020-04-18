@@ -51,7 +51,6 @@
     "react-query-devtools": "^1.1.0",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
-    "react-use": "^14.1.1",
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "react-window-infinite-loader": "^1.0.5",

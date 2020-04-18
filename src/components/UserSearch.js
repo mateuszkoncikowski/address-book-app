@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { setSearchValue } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -65,9 +67,17 @@ function UserSearch({ searchValue, setSearchValue }) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  searchValue: state.search.searchValue,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setSearchValue: (value) => dispatch(setSearchValue(value)),
+});
+
 UserSearch.propTypes = {
   searchValue: PropTypes.string.isRequired,
   setSearchValue: PropTypes.func.isRequired,
 };
 
-export default UserSearch;
+export default connect(mapStateToProps, mapDispatchToProps)(UserSearch);
