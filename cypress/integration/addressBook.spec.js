@@ -38,7 +38,7 @@ describe('smoke tests', () => {
       .eq(0)
       .should('contain', 'Lucas Gimenez');
     cy.get(s(search)).get('input').clear().type('Mar');
-    cy.get(s(userItem)).should('have.length', 2).eq(0);
+    cy.get(s(userItem)).should('have.length', 3).eq(0);
     cy.get(s(userItem))
       .should('contain', 'Sergio Marin')
       .eq(1)
