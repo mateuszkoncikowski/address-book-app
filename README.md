@@ -1,4 +1,4 @@
-![Address Book CI](https://github.com/mateuszkoncikowski/address-book-app/workflows/Address%20Book%20CI/badge.svg)
+[![Address Book CI](https://github.com/mateuszkoncikowski/address-book-app/workflows/Address%20Book%20CI/badge.svg)](https://github.com/mateuszkoncikowski/address-book-app/actions)
 
 # Address Book app
 
