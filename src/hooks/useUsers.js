@@ -29,6 +29,7 @@ const useUsers = (lang, fetchLimit, batchSize) => {
       getFetchMore: (lastPage) => {
         return lastPage;
       },
+      refetchOnWindowFocus: false,
     }
   );
 
