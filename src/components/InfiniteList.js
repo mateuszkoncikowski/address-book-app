@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import InfiniteLoader from 'react-window-infinite-loader';
@@ -13,14 +13,18 @@ function InfiniteList(props) {
   const {
     batchSize,
     fetchLimit,
-    lang,
+    nationality,
     searchValue,
     setIsLastItemDisplayed,
     setIsLoading,
     setSelectedUser,
   } = props;
 
-  const [users, fetchMore, isLoading] = useUsers(lang, fetchLimit, batchSize);
+  const [users, fetchMore, isLoading] = useUsers(
+    nationality,
+    fetchLimit,
+    batchSize
+  );
   const filteredUsers = useFilter(users, searchValue, filterUser);
 
   const isItemLoaded = (index) => {
@@ -86,7 +90,7 @@ InfiniteList.propTypes = {
   setIsLoading: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired,
   batchSize: PropTypes.number.isRequired,
-  lang: PropTypes.oneOf(COUNTRY_CODES.map((c) => c.code)).isRequired,
+  nationality: PropTypes.oneOf(COUNTRY_CODES.map((c) => c.code)).isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -94,7 +98,7 @@ const mapStateToProps = (state) => {
   return {
     searchValue: search.searchValue,
     fetchLimit: settings.fetchLimit,
-    lang: settings.lang,
+    nationality: settings.nationality,
     batchSize: settings.batchSize,
   };
 };

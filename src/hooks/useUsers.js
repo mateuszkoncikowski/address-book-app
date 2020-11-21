@@ -10,20 +10,20 @@ const config = { headers: { 'Access-Control-Allow-Origin': '*' } };
 
 const getUsers = async (key, params, fetchMoreParams) => {
   const startIndex = fetchMoreParams ? fetchMoreParams.startIndex : null;
-  const { lang, batchSize } = params;
+  const { nationality, batchSize } = params;
   const page = calculatePage(startIndex, batchSize);
   const { data } = await axios.get(
-    `https://randomuser.me/api/?page=${page}&results=${batchSize}&nat=${lang}&seed=sherpany`,
+    `https://randomuser.me/api/?page=${page}&results=${batchSize}&nat=${nationality}&seed=sherpany`,
     config
   );
 
   return { users: data.results };
 };
 
-const useUsers = (lang, fetchLimit, batchSize) => {
+const useUsers = (nationality, fetchLimit, batchSize) => {
   const [users, setUsers] = useState([]);
   const { data, fetchMore, isFetching, isFetchingMore } = useInfiniteQuery(
-    ['getUsers', { lang, batchSize }],
+    ['getUsers', { nationality, batchSize }],
     getUsers,
     {
       getFetchMore: (lastPage) => {

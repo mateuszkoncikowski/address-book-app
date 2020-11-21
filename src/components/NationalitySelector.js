@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { COUNTRY_CODES } from '../config';
-import { switchLanguage } from '../actions';
+import { switchNationality } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,21 +20,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LanguageSelector(props) {
-  const { lang, switchLanguage } = props;
+function NationalitySelector(props) {
+  const { nationality, switchNationality } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.container}>
       <Typography variant="h6" className={classes.header}>
-        Change language
+        Change nationality
       </Typography>
-      <ToggleButtonGroup variant="contained" color="primary" value={lang}>
+      <ToggleButtonGroup
+        variant="contained"
+        color="primary"
+        value={nationality}
+      >
         {COUNTRY_CODES.map(({ code }) => (
           <ToggleButton
             key={code}
             value={code}
-            onClick={() => switchLanguage(code)}
+            onClick={() => switchNationality(code)}
             data-cy={`set-lang-${code}`}
           >
             {code}
@@ -45,17 +49,20 @@ function LanguageSelector(props) {
   );
 }
 
-LanguageSelector.propTypes = {
-  lang: PropTypes.string.isRequired,
-  switchLanguage: PropTypes.func.isRequired,
+NationalitySelector.propTypes = {
+  nationality: PropTypes.string.isRequired,
+  switchNationality: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  lang: state.settings.lang,
+  nationality: state.settings.nationality,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  switchLanguage: (lang) => dispatch(switchLanguage(lang)),
+  switchNationality: (nationality) => dispatch(switchNationality(nationality)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LanguageSelector);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NationalitySelector);

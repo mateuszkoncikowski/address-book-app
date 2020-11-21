@@ -6,8 +6,8 @@ import NavBar from '../components/NavBar';
 import { PATHS } from '../config';
 import Loading from '../components/Loading';
 
-const LanguageSelector = React.lazy(() => {
-  return import('../components/LanguageSelector');
+const NationalitySelector = React.lazy(() => {
+  return import('../components/NationalitySelector');
 });
 
 function Settings() {
@@ -27,7 +27,7 @@ function Settings() {
         }
       />
       <Suspense fallback={<Loading />}>
-        <LanguageSelector />
+        <NationalitySelector />
       </Suspense>
     </>
   );
