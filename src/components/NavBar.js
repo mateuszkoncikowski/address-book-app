@@ -26,7 +26,7 @@ function NavBar({ searchComponent, navigationIcon }) {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" noWrap>
+        <Typography variant="h6" component="h1" noWrap>
           <Link className={classes.homeLink} to={PATHS.home}>
             Address Book
           </Link>
