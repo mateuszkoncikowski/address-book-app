@@ -1,6 +1,4 @@
-import * as R from 'ramda';
-
-import { always, ifElse, identity, filter } from 'ramda';
+import { always, ifElse, identity, filter, isEmpty } from 'ramda';
 
 export const filterUser = (filter, user) => {
   const {
@@ -17,7 +15,7 @@ export const filterUser = (filter, user) => {
 
 export const useFilter = (items, filterValue, fn) => {
   const filterFn = ifElse(
-    always(R.isEmpty(filterValue)),
+    always(isEmpty(filterValue)),
     identity,
     filter((item) => fn(filterValue, item))
   );

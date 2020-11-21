@@ -15,9 +15,9 @@ export const setFetchLimit = (limit) => ({
   limit,
 });
 
-export const switchNationality = (nationality) => ({
+export const setNationalities = (nationalities) => ({
   type: actionTypes.SET_NATIONALITY,
-  nationality: nationality,
+  nationalities: nationalities,
 });
 
 export const setSearchValue = (value) => ({

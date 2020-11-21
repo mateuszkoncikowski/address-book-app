@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { COUNTRY_CODES } from '../config';
-import { switchNationality } from '../actions';
+import { setNationalities } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,26 +21,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NationalitySelector(props) {
-  const { nationality, switchNationality } = props;
+  const { nationalities, setNationalities } = props;
   const classes = useStyles();
+
+  const handleSelectorChange = (event, nationalities) => {
+    setNationalities(nationalities);
+  };
 
   return (
     <div className={classes.container}>
       <Typography variant="h6" className={classes.header}>
-        Change nationality
+        Set nationalities
       </Typography>
       <ToggleButtonGroup
         variant="contained"
         color="primary"
-        value={nationality}
+        value={nationalities}
+        onChange={handleSelectorChange}
       >
         {COUNTRY_CODES.map(({ code }) => (
-          <ToggleButton
-            key={code}
-            value={code}
-            onClick={() => switchNationality(code)}
-            data-cy={`set-lang-${code}`}
-          >
+          <ToggleButton key={code} value={code} data-cy={`set-lang-${code}`}>
             {code}
           </ToggleButton>
         ))}
@@ -50,16 +50,17 @@ function NationalitySelector(props) {
 }
 
 NationalitySelector.propTypes = {
-  nationality: PropTypes.string.isRequired,
-  switchNationality: PropTypes.func.isRequired,
+  nationalities: PropTypes.array.isRequired,
+  setNationalities: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  nationality: state.settings.nationality,
+  nationalities: state.settings.nationalities,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  switchNationality: (nationality) => dispatch(switchNationality(nationality)),
+  setNationalities: (nationalities) =>
+    dispatch(setNationalities(nationalities)),
 });
 
 export default connect(

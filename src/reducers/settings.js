@@ -2,7 +2,7 @@ import { COUNTRY_CODES } from '../config';
 import { actionTypes } from '../actions';
 
 const initialState = {
-  nationality: COUNTRY_CODES[1].code,
+  nationalities: [COUNTRY_CODES[1].code],
   batchSize: 50,
   fetchLimit: 1000,
 };
@@ -12,7 +12,7 @@ const settings = (state = initialState, action) => {
     case actionTypes.SET_NATIONALITY:
       return {
         ...state,
-        nationality: action.nationality,
+        nationalities: action.nationalities,
       };
     case actionTypes.SET_FETCH_BATCH_SIZE:
       return {

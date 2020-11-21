@@ -54,11 +54,21 @@ describe('smoke tests', () => {
     cy.get(s('settings-link')).click();
     cy.get(s('set-lang-es')).should('have.attr', 'aria-pressed', 'true');
     cy.get(s('set-lang-fr')).click();
+    cy.get(s('set-lang-fr')).should('have.attr', 'aria-pressed', 'true');
+    cy.get(s('set-lang-es')).should('have.attr', 'aria-pressed', 'true');
     cy.get(s('home-link')).click();
+
+    // Spanish person
     cy.get(s(userItem))
       .eq(0)
-      .should('contain', 'Angelo Marchand')
-      .should('contain', 'angelo.marchand@example.com');
+      .should('contain', 'Alejandro Moya')
+      .should('contain', 'alejandro.moya@example.com');
+
+    // French person
+    cy.get(s(userItem))
+      .eq(3)
+      .should('contain', 'Justin Lucas')
+      .should('contain', 'justin.lucas@example.com');
   });
 
   it('should infinite scroll load more results', () => {

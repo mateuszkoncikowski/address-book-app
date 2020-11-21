@@ -1,6 +1,7 @@
 # Cypress
 cypress/videos/
 cypress/results/
+cypress/screenshots
 
 #IDE
 .idea

@@ -7,13 +7,12 @@ import { FixedSizeList as List } from 'react-window';
 import UserListItem from './UserListItem';
 import useFilter, { filterUser } from '../hooks/useFilter';
 import useUsers from '../hooks/useUsers';
-import { COUNTRY_CODES } from '../config';
 
 function InfiniteList(props) {
   const {
     batchSize,
     fetchLimit,
-    nationality,
+    nationalities,
     searchValue,
     setIsLastItemDisplayed,
     setIsLoading,
@@ -21,7 +20,7 @@ function InfiniteList(props) {
   } = props;
 
   const [users, fetchMore, isLoading] = useUsers(
-    nationality,
+    nationalities,
     fetchLimit,
     batchSize
   );
@@ -90,7 +89,7 @@ InfiniteList.propTypes = {
   setIsLoading: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired,
   batchSize: PropTypes.number.isRequired,
-  nationality: PropTypes.oneOf(COUNTRY_CODES.map((c) => c.code)).isRequired,
+  nationalities: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -98,7 +97,7 @@ const mapStateToProps = (state) => {
   return {
     searchValue: search.searchValue,
     fetchLimit: settings.fetchLimit,
-    nationality: settings.nationality,
+    nationalities: settings.nationalities,
     batchSize: settings.batchSize,
   };
 };

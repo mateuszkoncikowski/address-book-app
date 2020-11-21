@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import { map, pipe, reduce } from 'ramda';
+import { map, pipe, reduce, join } from 'ramda';
 import axios from 'axios';
 
 const calculatePage = (startIndex, batchSize) =>
@@ -10,20 +10,22 @@ const config = { headers: { 'Access-Control-Allow-Origin': '*' } };
 
 const getUsers = async (key, params, fetchMoreParams) => {
   const startIndex = fetchMoreParams ? fetchMoreParams.startIndex : null;
-  const { nationality, batchSize } = params;
+  const { nationalities, batchSize } = params;
+  const nationalitiesParam = join(',', nationalities);
+
   const page = calculatePage(startIndex, batchSize);
   const { data } = await axios.get(
-    `https://randomuser.me/api/?page=${page}&results=${batchSize}&nat=${nationality}&seed=sherpany`,
+    `https://randomuser.me/api/?page=${page}&results=${batchSize}&nat=${nationalitiesParam}&seed=sherpany`,
     config
   );
 
   return { users: data.results };
 };
 
-const useUsers = (nationality, fetchLimit, batchSize) => {
+const useUsers = (nationalities, fetchLimit, batchSize) => {
   const [users, setUsers] = useState([]);
   const { data, fetchMore, isFetching, isFetchingMore } = useInfiniteQuery(
-    ['getUsers', { nationality, batchSize }],
+    ['getUsers', { nationalities, batchSize }],
     getUsers,
     {
       getFetchMore: (lastPage) => {
