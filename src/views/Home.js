@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useNavigate } from '@reach/router';
 import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import SettingsIcon from '@material-ui/icons/Settings';
 import NavBar from '../components/NavBar';
 import UserSearch from '../components/UserSearch';
 import { PATHS } from '../config';
@@ -24,7 +24,7 @@ function Home() {
             color="inherit"
             data-cy="settings-link"
           >
-            <AccountCircle />
+            <SettingsIcon />
           </IconButton>
         }
       />

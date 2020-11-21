@@ -4,10 +4,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { Link } from '@reach/router';
+import { PATHS } from '../config';
 
 const useStyles = makeStyles(() => ({
   grow: {
     flexGrow: 1,
+  },
+  homeLink: {
+    textDecoration: 'none',
+    color: 'white',
+    '&:hover': {
+      color: 'lightGrey',
+    },
   },
 }));
 
@@ -18,7 +27,9 @@ function NavBar({ searchComponent, navigationIcon }) {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" noWrap>
-          Address Book
+          <Link className={classes.homeLink} to={PATHS.home}>
+            Address Book
+          </Link>
         </Typography>
         {searchComponent && searchComponent}
         <div className={classes.grow} />
