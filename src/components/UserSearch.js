@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { setSearchValue } from '../actions';
+import debounce from '@material-ui/core/utils/debounce';
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -48,6 +49,15 @@ const useStyles = makeStyles((theme) => ({
 function UserSearch({ searchValue, setSearchValue }) {
   const classes = useStyles();
 
+  const setDebouncedValue = useCallback(
+    debounce((value) => setSearchValue(value), 20),
+    []
+  );
+
+  const onChangeHandler = (event) => {
+    setDebouncedValue(event.target.value);
+  };
+
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
@@ -57,7 +67,7 @@ function UserSearch({ searchValue, setSearchValue }) {
         data-cy="user-search"
         placeholder="Search…"
         value={searchValue}
-        onChange={(event) => setSearchValue(event.target.value)}
+        onChange={onChangeHandler}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
