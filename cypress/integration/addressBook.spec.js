@@ -4,13 +4,14 @@ import { setFetchBatchSize, setFetchLimit } from '../../src/actions';
 const userItem = 'user-item';
 const modal = 'user-modal';
 const search = 'user-search';
-const infiniteScroll = '[style*="overflow: auto"';
+const infiniteScroll = '[style*="overflow: auto"]';
 
 describe('smoke tests', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.window().its('store').invoke('dispatch', setFetchBatchSize(25));
-    cy.window().its('store').invoke('dispatch', setFetchLimit(50));
+    cy.window().its('store').invoke('dispatch', setFetchBatchSize(50));
+    cy.window().its('store').invoke('dispatch', setFetchLimit(100));
+    cy.contains('Loading').should('not.be.visible');
   });
 
   it('should load users', () => {
@@ -21,7 +22,7 @@ describe('smoke tests', () => {
   });
 
   it('should open modal', () => {
-    cy.get(s(search)).type('Luc');
+    cy.get(s(search)).type('Luc', { delay: 100 });
     cy.get(s(userItem)).eq(0).click();
     cy.get(s(modal))
       .should('be.visible')
@@ -32,12 +33,12 @@ describe('smoke tests', () => {
   });
 
   it('should search return correct results', () => {
-    cy.get(s(search)).type('Luc');
+    cy.get(s(search)).type('Luc', { delay: 100 });
     cy.get(s(userItem))
       .should('have.length', 1)
       .eq(0)
       .should('contain', 'Lucas Gimenez');
-    cy.get(s(search)).get('input').clear().type('Mar');
+    cy.get(s(search)).get('input').clear().type('Mar', { delay: 100 });
     cy.get(s(userItem)).should('have.length', 3).eq(0);
     cy.get(s(userItem))
       .should('contain', 'Sergio Marin')
@@ -46,7 +47,7 @@ describe('smoke tests', () => {
   });
 
   it('should search return no results', () => {
-    cy.get(s(search)).type('Invalid');
+    cy.get(s(search)).type('Invalid', { delay: 100 });
     cy.get(s(userItem)).should('have.length', 0);
   });
 
@@ -71,9 +72,8 @@ describe('smoke tests', () => {
       .should('contain', 'justin.lucas@example.com');
   });
 
-  it('should infinite scroll load more results', () => {
-    cy.get(infiniteScroll).scrollTo('bottom', { duration: 3000 });
-    cy.get(infiniteScroll).scrollTo('bottom', { duration: 3000 });
+  it.only('should infinite scroll load more results', () => {
+    cy.get(infiniteScroll).scrollTo('bottom', { duration: 6000 });
     cy.contains('End of users catalog').should('be.visible');
   });
 });
