@@ -76,4 +76,9 @@ describe('smoke tests', () => {
     cy.get(infiniteScroll).scrollTo('bottom', { duration: 3000 });
     cy.contains('End of users catalog').should('be.visible');
   });
+
+  it('should handle 404 page', () => {
+    cy.visit('/invalid');
+    cy.contains('Ups, go back to Home').should('be.visible');
+  });
 });
