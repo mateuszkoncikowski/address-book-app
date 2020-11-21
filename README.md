@@ -2,6 +2,46 @@
 
 # Address Book app
 
+## Post review actions
+
+- Improved UI experience
+  - Profile icon changed to Settings icon
+  - Language selector changed to Nationality selector
+- Enable selection of multiple nationalities
+- Introduce default path to handle the 404 scenario.
+- Add debounce and memoize features to search input
+- Introduce Redux Dev Tools
+
+## Review discussion points
+
+#### Reviewer comment:
+
+`Only one file is covered with unit tests, parts are covered with e2e tests and this combination is not good. Low level unit tests are much more important than integration or even e2e tests, this is a great example for an ice cream cone testing antipattern. https://www .browserstack.com/guide/testing-pyramid-for-test-automation.`
+
+#### Author's comment:
+
+The Testing Pyramid is a concept which has been coined probably more than 10 years ago. A lot has changed since then. The tools got
+better. The cost/speed/value ratios with it. When writing tests I value confidence over everything else. Kent C. Dodds described
+this in one of his post: https://kentcdodds.com/blog/unit-vs-integration-vs-e2e-tests with this conclusion:
+
+_Every level comes with its own trade-offs. An E2E test has more points of failure making it often harder to track down what code
+caused the breakage, but it also means that your test is giving you more confidence. This is especially useful if you don't have as much
+time to write tests. I'd rather have the confidence and be faced with tracking down why it's failing, then not having caught the problem
+via a test in the first place._
+
+To summarise, choosing a testing strategy and approach is more complicated than a single article. It highly depends on the context
+(business context, tech stack, team skills and preferences etc). It should be a subject to a wide team debate because at the end is a
+team effort ;-) The solution I've provided is my personal 5 cents into the discussion.
+
+#### Reviewer comment:
+
+`Fetching and what's more important storing users list is excluded from redux, it's stored in a component state and is handled with a custom hook.`
+
+#### Author's comment:
+
+In my opinion storing users list in redux in this simple app is a step which increases the app complexity without any direct value gained
+. In the app context I don't see it as a global data but rather specific to the user's `<InfiniteList />` component.
+
 ## Solution key takeaways
 
 - Performance: address list re-render performance has been closely monitored when developing the solution. Scrolling and filtering results
