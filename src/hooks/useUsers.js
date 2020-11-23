@@ -22,6 +22,16 @@ const getUsers = async (key, params, fetchMoreParams) => {
   return { users: data.results };
 };
 
+/**
+ *
+ * Hook responsible for fetching users
+ *
+ * @param nationalities - list of user nationalities we want to fetch
+ * @param fetchLimit - maximum number we want to fetch via this hook
+ * @param batchSize - how many items we want to fetch per batch
+ * @returns {[*[], *, *]}
+ */
+
 const useUsers = (nationalities, fetchLimit, batchSize) => {
   const [users, setUsers] = useState([]);
   const { data, fetchMore, isFetching, isFetchingMore } = useInfiniteQuery(

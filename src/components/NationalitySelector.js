@@ -20,6 +20,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ *
+ * Component which manages selected nationalities
+ *
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function NationalitySelector(props) {
   const { nationalities, setNationalities } = props;
   const classes = useStyles();

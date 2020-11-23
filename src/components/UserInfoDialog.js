@@ -5,6 +5,14 @@ import Dialog from './Dialog';
 import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
 
+/**
+ *
+ * Modal section
+ *
+ * @param title
+ * @param fields
+ * @returns {JSX.Element}
+ */
 const renderSection = (title, fields) => {
   return (
     <>
@@ -22,6 +30,16 @@ const renderSection = (title, fields) => {
   );
 };
 
+/**
+ *
+ * Modal window which displays all user data
+ *
+ * @param isOpen
+ * @param handleClose
+ * @param user
+ * @returns {JSX.Element|null}
+ * @constructor
+ */
 function UserInfoDialog({ isOpen, handleClose, user }) {
   if (user === null) return null;
 

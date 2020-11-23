@@ -13,6 +13,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ *
+ * Default view for unhandled paths
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function NotFound() {
   const navigate = useNavigate();
   const classes = useStyles();

@@ -1,3 +1,5 @@
+// Shared configuration
+
 export const PATHS = {
   home: '/',
   settings: '/settings',

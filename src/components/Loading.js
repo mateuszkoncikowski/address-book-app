@@ -11,6 +11,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+/**
+ *
+ * Simple loading state component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Loading = () => {
   const classes = useStyles();
 

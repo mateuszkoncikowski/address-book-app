@@ -11,6 +11,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+/**
+ *
+ * Container for all the UserList elements
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function UserList() {
   const classes = useStyles();
   const [selectedUser, setSelectedUser] = useState(null);

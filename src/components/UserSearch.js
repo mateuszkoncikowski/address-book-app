@@ -46,6 +46,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ *
+ * Input field used for filtering the results
+ *
+ * @param searchValue
+ * @param setSearchValue
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
 function UserSearch({ searchValue, setSearchValue }) {
   const classes = useStyles();
 

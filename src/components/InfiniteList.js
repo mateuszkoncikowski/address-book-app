@@ -8,6 +8,15 @@ import UserListItem from './UserListItem';
 import useFilter, { filterUser } from '../hooks/useFilter';
 import useUsers from '../hooks/useUsers';
 
+/**
+ *
+ * Infinite list component which handles the logic for
+ * loading next batches od data depending on your screen position
+ *
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function InfiniteList(props) {
   const {
     batchSize,

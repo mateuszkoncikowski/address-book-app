@@ -11,6 +11,13 @@ const UserList = React.lazy(() => {
   return import('../components/UserList');
 });
 
+/**
+ *
+ * Home view with the UserList displayed
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Home() {
   const navigate = useNavigate();
 

@@ -10,6 +10,13 @@ const NationalitySelector = React.lazy(() => {
   return import('../components/NationalitySelector');
 });
 
+/**
+ *
+ * Settings view with nationality selector
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function Settings() {
   const navigate = useNavigate();
 

@@ -20,6 +20,15 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+/**
+ *
+ * Top Navbar of the application
+ *
+ * @param searchComponent
+ * @param navigationIcon
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function NavBar({ searchComponent, navigationIcon }) {
   const classes = useStyles();
 

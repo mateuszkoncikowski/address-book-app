@@ -15,6 +15,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ *
+ * A single row which displays basic user data
+ *
+ * @param user
+ * @param index
+ * @param onClick
+ * @param style
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function UserListItem({ user, index, onClick, style }) {
   const classes = useStyles();
 
