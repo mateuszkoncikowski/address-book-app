@@ -11,6 +11,8 @@
 - Introduce default path to handle the 404 scenario.
 - Add debounce and memoize features to search input
 - Introduce Redux Dev Tools
+- Added JSDoc
+- Added unit tests (https://github.com/testing-library/react-testing-library)
 
 ## Review discussion points
 
