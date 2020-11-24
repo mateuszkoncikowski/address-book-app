@@ -2,12 +2,14 @@
   "env": {
     "browser": true,
     "es6": true,
-    "cypress/globals": true
+    "cypress/globals": true,
+    "jest/globals": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:cypress/recommended"
+    "plugin:cypress/recommended",
+    "plugin:jest/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -21,7 +23,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "cypress"],
+  "plugins": ["react", "react-hooks", "cypress", "jest"],
   "settings": {
     "react": {
       "version": "detect"
